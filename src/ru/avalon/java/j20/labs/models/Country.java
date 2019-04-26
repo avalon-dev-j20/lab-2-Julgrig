@@ -45,7 +45,7 @@ public class Country {
     }
 
     /*
-     * TODO(Студент): для класса Country переопределить методы equals и hashCode
+     * TODO(Студент): для класса Country переопределить методы equals и hashCode  СДЕЛАНО
      */
 
     /**
@@ -59,8 +59,34 @@ public class Country {
      */
     public static Country valueOf(String text) throws ParseException {
         /*
-         * TODO(Студент): Реализовать метод valueOf класса Country
+         * TODO(Студент): Реализовать метод valueOf класса Country    СДЕЛАНО
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        String[] s;
+        if (text != null && text.contains(":")) {
+            s = text.split(":");
+        } else {
+            throw new ParseException("The string is invalid", 0);
+        }
+
+        return new Country(s[0], s[1]);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Country country = (Country) o;
+
+        if (code != null ? !code.equals(country.code) : country.code != null) return false;
+        return name != null ? name.equals(country.name) : country.name == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = code != null ? code.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }

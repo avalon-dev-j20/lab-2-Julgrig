@@ -3,6 +3,8 @@ package ru.avalon.java.j20.labs.tasks;
 import ru.avalon.java.j20.labs.Task;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -32,14 +34,14 @@ public class Task2 implements Task {
          *    Reader, FileReader.
          *
          *    Для сохранения прочитанных данных следует пользоваться
-         *    классом StringBuilder.
+         *    классом StringBuilder.  СДЕЛАНО
          *
          * 2. Реализовать метод write.
          *
          *    При реализации метода следует пользоваться типами данных:
-         *    Writer и FileWriter.
+         *    Writer и FileWriter.    СДЕЛАНО
          *
-         * 3. С использованием отладчика проверить корректность работы программы.
+         * 3. С использованием отладчика проверить корректность работы программы.  СДЕЛАНО
          */
     }
 
@@ -53,9 +55,23 @@ public class Task2 implements Task {
      * @return содержимое файла в виде текста.
      * @throws IOException в случае ошибок ввода-вывода.
      */
-    private String read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+    private String read(File file) throws IOException {     // Task 2 # 1
+        FileReader fr = new FileReader(file);
+
+        StringBuilder builder = new StringBuilder();
+
+        while (fr.ready()) {
+            int data = fr.read();
+            builder.append((char)data);
+
+        }
+        fr.close();
+        return builder.toString();
+
     }
+
+
+
 
     /**
      * Выполняет запись текстоых данных в файл в текстовом
@@ -65,7 +81,10 @@ public class Task2 implements Task {
      * @param text текст
      * @throws IOException в случае ошибок ввода-вывода.
      */
-    private void write(File file, String text) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+    private void write(File file, String text) throws IOException {   // Task 2 # 1
+        FileWriter writer = new FileWriter(file);
+        writer.write(text);
+        writer.flush();
+        writer.close();
     }
 }

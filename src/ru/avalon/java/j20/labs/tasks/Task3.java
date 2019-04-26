@@ -2,9 +2,10 @@ package ru.avalon.java.j20.labs.tasks;
 
 import ru.avalon.java.j20.labs.Task;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Задание №3
@@ -30,12 +31,12 @@ public class Task3 implements Task {
          * 1. Реализовать метод read.
          *
          *    При чтении файла следует пользоваться типами данных:
-         *    FileReader и BufferedReader.
+         *    FileReader и BufferedReader.  СДЕЛАНО
          *
          * 2. Реализовать метод write.
          *
          *    При реализации метода следует пользоваться типами данных:
-         *    PrintWriter.
+         *    PrintWriter.  СДЕЛАНО
          *
          * 3. С использованием отладчика проверить корректность работы программы.
          */
@@ -51,9 +52,20 @@ public class Task3 implements Task {
      * @return содержимое файла в виде текста.
      * @throws IOException в случае ошибок ввода-вывода.
      */
-    private Collection<String> read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+    private Collection<String> read(File file) throws IOException {     // Task 3 # 1
+        List<String>list = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))){
+            String s;
+            while ((s =br.readLine()) != null) {
+                list.add(s);
+            }
+        }
+            return list;
     }
+
+
+
+
 
     /**
      * Выполняет запись коллекции строковых элементов в файл.
@@ -65,7 +77,17 @@ public class Task3 implements Task {
      * @param collection коллекция строк
      * @throws IOException в случае ошибок ввода-вывода.
      */
-    private void write(File file, Collection<String> collection) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+    private void write(File file, Collection<String> collection) throws IOException {  // Task 3 # 2
+                try(PrintWriter pw = new PrintWriter(file)) {
+                    for (String s : collection) {
+                        pw.println(s);
+                    }
+
+        }
     }
 }
+
+
+
+
+
